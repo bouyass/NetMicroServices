@@ -7,13 +7,13 @@
         {
              using(var serviceScope = app.ApplicationServices.CreateScope())
             {
-                SeedData(app.ApplicationServices.GetService<AppDbContext>());
+                SeedData(serviceScope.ServiceProvider.GetService<AppDbContext>());
             }
         }
 
         private static void SeedData(AppDbContext? context)
         {
-            if (!context.Platforms.Any())
+            if (context != null && !context.Platforms.Any())
             {
                 Console.WriteLine(" Seeding data ...");
 
