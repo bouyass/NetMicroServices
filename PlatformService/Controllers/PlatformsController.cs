@@ -50,14 +50,12 @@ namespace PlatformService.Controllers
                 _plaformRepo.SaveChanges();
 
                 var platformReadDto = _mapper.Map<PlatformReadDto>(platformModel);
-
-                return platformReadDto;
+                return CreatedAtRoute(nameof(GetPlatformById), new { Id = platformReadDto.Id }, platformReadDto);
             }
             else
             {
                 throw new Exception("Invalid arguements");
             }
-
         }
     }
 }
